@@ -5,6 +5,7 @@ import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.rounded.Face
+import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material.icons.rounded.LocationOn
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -14,20 +15,32 @@ sealed class LateralMenuItems (
     val icon: ImageVector,
     val name: String,
     val route: String,
+    val position: Int,
 ){
     object AgentsMenuItem: LateralMenuItems(
         Icons.Rounded.Face,
         "Agents",
-        NavigationRoutes.navigationContentScreen
+        NavigationRoutes.navigationContentScreen,
+        0
     )
+
+    object AgentsFavoritesMenuItem: LateralMenuItems(
+        Icons.Rounded.Favorite,
+        "Favorites",
+        NavigationRoutes.navigationContentFavScreen,
+        1
+    )
+
     object MapMenuItem: LateralMenuItems(
         Icons.Rounded.LocationOn,
         "Maps",
-        NavigationRoutes.comingSoonScreen
+        NavigationRoutes.comingSoonScreen,
+        2
     )
     object OptionsMenuItem: LateralMenuItems(
         Icons.Rounded.Info,
         "Options",
-        NavigationRoutes.comingSoonScreen
+        NavigationRoutes.comingSoonScreen,
+        3
     )
 }

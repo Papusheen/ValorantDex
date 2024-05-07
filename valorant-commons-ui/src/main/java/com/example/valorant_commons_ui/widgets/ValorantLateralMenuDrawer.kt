@@ -16,11 +16,12 @@ import kotlinx.coroutines.launch
 fun ValorantLateralMenuDrawer(
     navController: NavHostController,
     drawerState: DrawerState,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     val scope = rememberCoroutineScope()
     val menuItems = listOf(
         LateralMenuItems.AgentsMenuItem,
+        LateralMenuItems.AgentsFavoritesMenuItem,
         LateralMenuItems.MapMenuItem,
         LateralMenuItems.OptionsMenuItem,
     )
@@ -36,7 +37,8 @@ fun ValorantLateralMenuDrawer(
                         scope.launch {
                             drawerState.close()
                         }
-                        navController.navigate(it.route)}) }
+                        navController.navigate(it.route)})
+                }
             }
         }) {
         content()

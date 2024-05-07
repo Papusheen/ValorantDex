@@ -27,6 +27,11 @@ class AgentViewModel @Inject constructor(
     val agentByIdLiveData: LiveData<ValorantNetworkResult<AgentDomainModel>>
         get() = _agentByIdLiveData
 
+    private var _agentsFavoritesLiveData = MutableLiveData<List<AgentDomainModel>>()
+
+    val agentsFavoritesLiveData: LiveData<List<AgentDomainModel>>
+        get() = _agentsFavoritesLiveData
+
     fun getAgents() {
         viewModelScope.launch(dispatcher) {
             _agentsLiveData.postValue(ValorantNetworkResult.LoadingStatus())
@@ -39,6 +44,20 @@ class AgentViewModel @Inject constructor(
         viewModelScope.launch(dispatcher) {
             _agentByIdLiveData.postValue(ValorantNetworkResult.LoadingStatus())
             _agentByIdLiveData.postValue(agentsUseCase.getAgentById(agentId))
+        }
+    }
+
+    fun getFavoritesAgents() {
+        viewModelScope.launch(dispatcher) {
+            _agentsFavoritesLiveData.postValue(listOf())
+            val result = agentsUseCase.getFavoriteAgents()
+            _agentsFavoritesLiveData.postValue(result)
+        }
+    }
+
+    fun changeFavoriteAgent(agentId: String?) {
+        viewModelScope.launch(dispatcher) {
+            agentsUseCase.changeFavoriteAgent(agentId)
         }
     }
 }

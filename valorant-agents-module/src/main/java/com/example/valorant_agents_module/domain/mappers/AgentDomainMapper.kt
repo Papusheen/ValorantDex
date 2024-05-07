@@ -24,6 +24,10 @@ class AgentDomainMapper {
         }
     }
 
+    fun convertListEntityToDomain(responseResult: List<AgentEntity>): List<AgentDomainModel> {
+        return responseResult.map { agentResponse -> map(agentResponse) }
+    }
+
     fun convertEntityToDomain(responseResult: ValorantNetworkResult<AgentEntity>): ValorantNetworkResult<AgentDomainModel> {
         return when (responseResult) {
             is ValorantNetworkResult.SuccessStatus -> {

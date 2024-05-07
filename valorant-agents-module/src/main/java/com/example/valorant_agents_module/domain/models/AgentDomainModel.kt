@@ -18,4 +18,5 @@ data class AgentDomainModel(
     val recruitmentDomainModel: RecruitmentDomainModel?,
     val role: RoleDomainModel?,
     val abilities: List<AbilityDomainModel>?,
+    var isFavorite: Boolean = false,
 ): Serializable

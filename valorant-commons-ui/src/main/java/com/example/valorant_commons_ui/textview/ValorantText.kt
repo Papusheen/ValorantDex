@@ -29,6 +29,7 @@ import com.example.valorant_commons_ui.theme.ValorantViewPreviews
                .padding(horizontal = cardMediumPadding),
             style = MaterialTheme.typography.bodyMedium,
             textAlign = textAlign,
+            fontSize = 15.sp
             )
       }
    }
@@ -44,7 +45,7 @@ import com.example.valorant_commons_ui.theme.ValorantViewPreviews
                .padding(horizontal = cardMediumPadding),
             style = MaterialTheme.typography.titleLarge,
             textAlign = textAlign,
-            fontSize = 20.sp
+            fontSize = 17.sp
          )
       }
    }

@@ -7,8 +7,9 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.valorant_agents_module.data.models.converter.AgentConverter
 import com.example.valorant_agents_module.data.models.entities.AgentEntity
+import com.example.valorant_agents_module.data.models.entities.AgentFavoritesEntity
 
-@Database(entities = [AgentEntity::class], version = 2)
+@Database(entities = [AgentEntity::class, AgentFavoritesEntity::class], version = 3)
 @TypeConverters(AgentConverter::class)
 abstract class AgentDatabase : RoomDatabase() {
     abstract fun agentDao(): AgentDao

@@ -19,6 +19,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -28,6 +29,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.valorant_agents_module.ui.view.screens.AgentsGridList
+import com.example.valorant_agents_module.ui.view.screens.NoAgents
 import com.example.valorant_agents_module.ui.viewmodels.AgentViewModel
 import com.example.valorant_commons.network.data.ValorantNetworkResult
 import com.example.valorant_commons_ui.screens.LoadingScreen
@@ -95,6 +97,27 @@ fun ValorantTapContent(navController: NavController, viewModel: AgentViewModel =
             LoadingScreen()
         } else {
             agents.value?.data?.let { agents -> AgentsGridList(agents, navController = navController) }
+        }
+    }
+}
+
+@Composable
+fun ValorantFavoritesContent(navController: NavController, viewModel: AgentViewModel = hiltViewModel<AgentViewModel>()) {
+    val agents = viewModel.agentsFavoritesLiveData.observeAsState()
+    val refreshCount by remember { mutableIntStateOf(0) }
+    LaunchedEffect(key1 = refreshCount) {
+        viewModel.getFavoritesAgents()
+    }
+    Column(
+        modifier = Modifier
+            .fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+    ) {
+        if (agents.value?.isEmpty() == true) {
+            NoAgents()
+        } else {
+            agents.value?.let { agents -> AgentsGridList(agents, navController = navController) }
         }
     }
 }
